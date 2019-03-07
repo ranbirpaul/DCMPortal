@@ -1,0 +1,46 @@
+
+<div class="container"> 
+<mat-toolbar color="default">
+  <span class="fill-remaining-space">Configuration Management</span>
+</mat-toolbar> 
+
+<form class="form">
+    <div class="form-element">
+        <button mat-raised-button color="primary" type="submit" class="button">New Object Type</button>
+      </div>
+
+    <mat-form-field  class="form-element">
+        <mat-select placeholder="Object Type">
+            <mat-option >
+                Rack
+            </mat-option>
+            <mat-option >
+                Room
+            </mat-option>
+            <mat-option>
+                Floor
+            </mat-option>
+          </mat-select>
+    </mat-form-field>
+  <mat-form-field class="form-element">
+    <input matInput placeholder="Field" >
+  </mat-form-field>
+  <mat-form-field class="form-element">
+    <input matInput placeholder="Field Caption" >
+  </mat-form-field>
+  <mat-form-field  class="form-element">
+      <mat-select placeholder="Field Data Type">
+          <mat-option >
+              String
+          </mat-option>
+          <mat-option >
+              Number
+          </mat-option>
+          <mat-option>
+              Enum
+          </mat-option>
+        </mat-select>
+  </mat-form-field>
+
+  </form>
+  </div>

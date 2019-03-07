@@ -1,0 +1,71 @@
+
+
+<mat-toolbar color="default">
+    <span class="fill-remaining-space">Floor Management</span>
+  </mat-toolbar>
+
+
+<div  fxLayout="row" fxLayoutAlign="space-between top" *ngIf="isAuthor" >
+    <div fxFlex='40'><mat-card class="example-card">
+      <mat-card-header>
+        
+        <mat-card-title>Floor Add/Update</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+    <div class="container"  novalidate> 
+        <app-master-location locationInput="editLocation" (locationSelect)="locationSelectHandler($event)">
+        </app-master-location>
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="form">
+  
+      <mat-form-field class=" basic-container">
+      <mat-select formControlName="site" placeholder="Site" (selectionChange)="onSiteSelect($event.value)">
+          <mat-option *ngFor="let site of siteArray" [value]="site">
+              {{site}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    <mat-form-field class=" basic-container">
+        <mat-select formControlName="building" placeholder="Building" >
+            <mat-option *ngFor="let building of buildingList" [value]="building.buildingId">
+                {{building.buildingName}}
+            </mat-option>
+          </mat-select>
+    </mat-form-field>
+
+      <mat-form-field class=" basic-container">
+          <input matInput placeholder="Floor" formControlName="floor">
+          <mat-error *ngIf="!formGroup.controls['floor'].valid && formGroup.controls['floor'].touched">
+            {{ getSiteError() }}
+          </mat-error>
+        </mat-form-field> 
+
+        <mat-form-field class=" basic-container">
+                <input matInput placeholder="Zone" formControlName="zone">
+                <mat-error *ngIf="!formGroup.controls['zone'].valid && formGroup.controls['zone'].touched">
+                  {{ getSiteError() }}
+                </mat-error>
+              </mat-form-field>        
+
+        
+      <button mat-raised-button color="primary" type="submit" class="button" [disabled]="!formGroup.valid">Submit Form</button>
+    
+  
+  </form>
+  </div>
+      </mat-card-content>
+  
+  
+  
+  
+  </mat-card>
+  </div>
+    <div fxFlex='60' >
+        <app-floor-list></app-floor-list>
+    </div>
+  </div>
+  <div  fxLayout="row" fxLayoutAlign="space-between top" *ngIf="!isAuthor" >
+      <div fxFlex='100'>
+          <app-floor-list></app-floor-list>
+        </div>
+  </div>
+  

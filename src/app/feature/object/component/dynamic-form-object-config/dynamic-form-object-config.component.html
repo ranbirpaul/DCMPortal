@@ -1,0 +1,14 @@
+<div [formGroup]="form">
+  
+  <div [ngSwitch]="config.controlType"  >
+    <mat-form-field class="form-element" >
+    <input  matInput *ngSwitchCase="'textbox'" [placeholder]="config.label" [formControlName]="config.key"
+            [id]="config.key" [type]="config.type">
+      </mat-form-field>
+      <select [id]="config.key" *ngSwitchCase="'dropdown'" [formControlName]="config.key">
+      <option *ngFor="let opt of config.options" [value]="opt.key">{{opt.value}}</option>
+    </select>
+
+  </div> 
+  <div class="errorMessage" *ngIf="!isValid">{{config.label}} is required</div>
+</div>

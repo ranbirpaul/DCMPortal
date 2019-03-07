@@ -1,0 +1,8 @@
+
+[
+	{"type":"abb.ability.device.dca.rack","model":"abb.ability.device","typeDisplayName":"Rack"},
+	{"type":"abb.ability.device.dca.type.room","model":"abb.ability.device", "typeDisplayName":"Room"},
+	
+	{"type": "abb.ability.device.dca.type.location","model": "abb.ability.device","typeDisplayName":"Location"},
+    {"type": "abb.ability.device.dca.type.tenant","model": "abb.ability.device","typeDisplayName":"Tenant"}
+]

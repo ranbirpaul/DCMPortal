@@ -1,0 +1,48 @@
+<mat-toolbar color="default">
+  <span class="fill-remaining-space">DCA Type Management</span>
+</mat-toolbar>     
+
+<div *ngIf="isAuthor"  fxLayout="row" fxLayoutAlign="space-between top" >
+<div fxFlex='30'><mat-card class="example-card">
+<mat-card-header>
+<div mat-card-avatar ></div>
+<mat-card-title>DCA Type - Add/Update</mat-card-title>
+</mat-card-header>
+<mat-card-content>
+<div class="container" novalidate> 
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" class="form">
+
+<mat-form-field class="form-element">
+<input matInput placeholder="DCA Type" formControlName="dcaType">
+</mat-form-field>
+
+<mat-form-field class="form-element">
+<input matInput placeholder="Ability Model" formControlName="abilityModel">
+</mat-form-field> 
+
+<mat-form-field class="form-element">
+<input matInput placeholder="Ability Type" formControlName="abilityType">
+</mat-form-field>  
+
+<div class="form-element">
+<button mat-raised-button color="primary" type="submit" class="button" >Submit Form</button>
+</div>
+
+</form>
+</div>
+</mat-card-content>
+</mat-card>
+</div>
+<div fxFlex='70' >
+  <app-object-type-list></app-object-type-list>
+</div>
+</div>
+
+<div *ngIf="!isAuthor"  fxLayout="row" fxLayoutAlign="space-between top" >
+<div fxFlex='100'>
+  <app-object-type-list></app-object-type-list>
+  
+</div>
+</div>      
+
+

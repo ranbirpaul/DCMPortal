@@ -1,0 +1,6 @@
+
+[
+    {"type": "abb.ability.dca.structure.location.type","model": "abb.ability.dca.structure.location","typeDisplayName":"Location"},
+    {"type": "abb.ability.dca.structure.tenant.type","model": "abb.ability.dca.structure.tenant","typeDisplayName":"Tenant"},
+    {"type": "abb.ability.dca.structure.tenant.type","model": "abb.ability.dca.structure.tenant","typeDisplayName":"Functional Structure"}
+]

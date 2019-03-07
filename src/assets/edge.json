@@ -1,0 +1,7 @@
+
+[
+    {"type":"abb.ability.device.dca.feeder_A","model":"abb.ability.device","typeDisplayName":"Feeder A"},
+    {"type":"abb.ability.device.dca.feeder_B","model":"abb.ability.device","typeDisplayName":"Feeder B"},
+    {"type":"abb.ability.device.sensor","model":"abb.ability.device","typeDisplayName":"BCM"},
+    {"type":"abb.ability.device.edge.system","model":"abb.ability.device","typeDisplayName":"Edge System"}
+]

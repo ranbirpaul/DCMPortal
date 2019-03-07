@@ -1,0 +1,31 @@
+
+
+  <mat-toolbar color="default">
+      <span class="fill-remaining-space">Object Management</span>
+    </mat-toolbar>     
+    
+    <div *ngIf="isAuthor"  fxLayout="row" fxLayoutAlign="space-between top" >
+    <div fxFlex='30'>
+        <app-object-add>
+          </app-object-add> 
+    </div>
+    <div fxFlex='70' >
+    <!--   <json-schema-form
+        [form]="yourCompoundInputObject"
+        (onSubmit)="yourOnSubmitFn($event)">
+      </json-schema-form>
+    -->
+
+    <app-object-list></app-object-list>
+    </div>
+    </div>
+    
+    <div *ngIf="!isAuthor"  fxLayout="row" fxLayoutAlign="space-between top" >
+    <div fxFlex='100'>
+        <app-object-list></app-object-list>
+      
+    </div>
+    </div>      
+    
+    
+    

@@ -1,0 +1,29 @@
+<mat-sidenav-container class="all-wrap" fullscreen>
+    <mat-sidenav #sidenav>
+      <mat-list>
+        <mat-list-item [routerLink]="['/']"> Foo</mat-list-item>
+        <mat-list-item [routerLink]="['/tenantAdd']"> Tenant Add</mat-list-item>
+      </mat-list>
+    </mat-sidenav>
+  
+    <div class="page-wrap">
+      <header role="banner">
+        <mat-toolbar color="primary">
+          <button
+            type="button"
+            mat-icon-button
+            (click)="sidenav.open()"
+            title="Open sidenav">
+            <mat-icon>menu</mat-icon>
+          </button>
+          Datacenter Management Portal
+        </mat-toolbar>
+      </header>
+      <app-dcm-main>
+
+      </app-dcm-main>
+      <app-dcm-footer>
+
+      </app-dcm-footer>
+    </div>
+  </mat-sidenav-container>

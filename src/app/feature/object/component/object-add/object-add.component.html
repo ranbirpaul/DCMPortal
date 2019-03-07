@@ -1,0 +1,38 @@
+
+    <mat-card class="example-card">
+  <mat-card-header>
+  <div mat-card-avatar ></div>
+  <mat-card-title>{{objectName}} - Add/Update</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+  <div class="container" novalidate> 
+    <div>
+
+      
+      <form (ngSubmit)="onSubmit()" [formGroup]="form" class="form">
+
+      <mat-form-field class="form-element">
+        <mat-select placeholder="Object Type" [(value)]="selectedValue" (selectionChange)="onObjectTypeChange($event.value)">
+          <mat-option *ngFor="let type of types" [value]="type.type">
+              {{type.typeDisplayName}}
+          </mat-option>
+        </mat-select>
+    </mat-form-field>
+        <div *ngFor="let config of configs"  >
+          <app-dynamic-form-object-config [config]="config" [form]="form"></app-dynamic-form-object-config>
+        </div>
+        <div class="form-element">
+          <button mat-raised-button color="primary" [disabled]="!form.valid" type="submit" class="button" >Submit Form</button>
+        </div>
+
+      </form>
+    
+     
+    </div>
+  </div>
+  </mat-card-content>
+  </mat-card>
+    
+  
+  
+  

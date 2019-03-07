@@ -1,0 +1,35 @@
+
+
+  <mat-toolbar color="default">
+    <span class="fill-remaining-space">Edge Object Management</span>
+  </mat-toolbar>     
+  
+  <div *ngIf="isAuthor"  fxLayout="row" fxLayoutAlign="space-between top" >
+  <div fxFlex='30'>
+      <app-edge-object-add>
+        </app-edge-object-add> 
+        
+  </div>
+  <div fxFlex='70' >
+  <!--   <json-schema-form
+      [form]="yourCompoundInputObject"
+      (onSubmit)="yourOnSubmitFn($event)">
+    </json-schema-form>
+  -->
+
+  <!--<app-edge-object-list></app-edge-object-list>-->
+
+  <app-edge-object-list></app-edge-object-list>
+  </div>
+  </div>
+  
+  <div *ngIf="!isAuthor"  fxLayout="row" fxLayoutAlign="space-between top" >
+  <div fxFlex='100'>
+    <!--<app-edge-object-list></app-edge-object-list>-->
+    <app-edge-object-list></app-edge-object-list>
+    
+  </div>
+  </div>      
+  
+  
+  

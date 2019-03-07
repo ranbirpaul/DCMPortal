@@ -1,0 +1,65 @@
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+       <mat-icon class="dcm-icon" [matMenuTriggerFor]="menu">menu</mat-icon>
+       <mat-menu #menu="matMenu" >
+        <button mat-menu-item (click)="onClick('/objectEdgeAdd')" >Edge Object Management</button>
+        <button mat-menu-item (click)="onClick('/objectAdd')" >DCM Object Management</button> 
+        <button mat-menu-item (click)="onClick('/objectAdvanceAdd')" >Advance DCM Object Management</button> 
+        <button mat-menu-item (click)="onClick('/objectStructureAdd')" >DCM Object Structure Management</button> 
+        <button mat-menu-item [matMenuTriggerFor]="configuration"  >Configuration Management</button> 
+              <!--<button mat-menu-item (click)="onClick('/tenantAdd')" >Tenant Management</button>
+        <button mat-menu-item [matMenuTriggerFor]="datacenter" >Datacenter Management</button>
+         <button mat-menu-item [matMenuTriggerFor]="rack">Rack Management</button>
+         <button mat-menu-item [matMenuTriggerFor]="equipment">Equipment Management</button> -->        
+         <button mat-menu-item [matMenuTriggerFor]="user">User Management</button>
+       </mat-menu>
+      
+       <mat-menu #configuration="matMenu">
+        <!--<button mat-menu-item  (click)="onClick('/configurationAdd')">Configuration Type Add</button>-->
+        <button mat-menu-item (click)="onClick('/objectTypeAdd')">DCA Type Management</button>
+        <button mat-menu-item (click)="onClick('/edgeConfigurationAdd')">Edge Configuration Management</button>
+        </mat-menu>
+
+       <mat-menu #datacenter="matMenu">
+            <button mat-menu-item (click)="onClick('/datacenterAdd')">Datacenter Location</button>
+            <button mat-menu-item (click)="onClick('/floorAdd')">Datacenter Floor</button>
+            <button mat-menu-item (click)="onClick('/roomAdd')">Datacenter Room</button>
+        </mat-menu>
+        <mat-menu #rack="matMenu">
+                <button mat-menu-item (click)="onClick('/rackAdd')">Datacenter Rack</button>
+                <button mat-menu-item [matMenuTriggerFor]="assign">Rack Assignation</button>
+                <button mat-menu-item (click)="onClick('/rackImport')">Rack Import</button>
+                <button mat-menu-item (click)="onClick('/rackExport')">Rack Export</button>
+        </mat-menu>   
+        <mat-menu #assign="matMenu">
+                        <button mat-menu-item (click)="onClick('/rackSpaceAdd')">Rack to Space Assignation</button>
+                        <button mat-menu-item (click)="onClick('/rackTenantAdd')">Rack to Tenant Assignation</button>
+                        <button mat-menu-item (click)="onClick('/rackBcmAdd')">Rack to BCM Assignation</button>
+        </mat-menu>      
+        <mat-menu #equipment="matMenu">
+                <button mat-menu-item (click)="onClick('/equipmentAdd')">Equipment Space Assignation</button>
+                <button mat-menu-item (click)="onClick('/equipmentImport')">Equipment Import</button>
+                <button mat-menu-item (click)="onClick('/equipmentExport')">Equipment Export</button>
+        </mat-menu>        
+        <mat-menu #user="matMenu">
+                <button mat-menu-item (click)="onClick('/userAdd')">Datacenter User</button>
+                <button mat-menu-item (click)="onClick('/userTenantAdd')">Tenant User</button>                
+                <button mat-menu-item (click)="onClick('/userImport')">User Import</button>
+                <button mat-menu-item (click)="onClick('/userExport')">User Export</button>
+        </mat-menu>        
+
+       <span class="dcm-spacer"></span>       
+   <span>Datacenter Management Portal</span>
+   <span class="dcm-spacer"></span>
+   <mat-slide-toggle [checked]="isDarkTheme | async" (change)="toggleDarkTheme($event.checked)">
+   </mat-slide-toggle>
+
+   <button mat-icon-button (click)="logOut()">
+        <mat-icon class="dcm-icon"  >account_box</mat-icon>
+   </button>  
+ 
+</mat-toolbar-row>
+</mat-toolbar>

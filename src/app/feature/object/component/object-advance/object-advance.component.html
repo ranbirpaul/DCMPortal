@@ -1,0 +1,47 @@
+<mat-toolbar color="default">
+    <span class="fill-remaining-space">Advance Object Management</span>
+  </mat-toolbar>     
+  
+  <div *ngIf="isAuthor"  fxLayout="row" fxLayoutAlign="space-between top" >
+  <div fxFlex='30'><mat-card class="example-card">
+  <mat-card-header>
+  <div mat-card-avatar ></div>
+  <mat-card-title>Advance Object - Add/Update</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" class="form">
+        <mat-form-field class="form-element">
+                <mat-select placeholder="Object Type" formControlName="type" [(value)]="selectedType" (selectionChange)="onObjectTypeChange($event.value)">
+                  <mat-option *ngFor="let type of types" [value]="type.type">
+                      {{type.typeDisplayName}}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="form-element">
+                    <input matInput placeholder="Object Name" formControlName="name">
+                    
+                  </mat-form-field>            
+</form>
+  <div class="container" novalidate> 
+      <json-schema-form
+      [form]="compoundObject"
+      (onSubmit)="objectOnSubmitFn($event)">
+    </json-schema-form>
+  </div>
+  </mat-card-content>
+  </mat-card>
+  </div>
+  <div fxFlex='70' >
+      <app-object-advance-list></app-object-advance-list>
+  </div>
+  </div>
+  
+  <div *ngIf="!isAuthor"  fxLayout="row" fxLayoutAlign="space-between top" >
+  <div fxFlex='100'>
+        <app-object-advance-list></app-object-advance-list>
+    
+  </div>
+  </div>      
+  
+  
+  

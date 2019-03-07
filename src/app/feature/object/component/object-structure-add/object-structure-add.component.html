@@ -1,0 +1,126 @@
+
+
+  <mat-toolbar color="default">
+    <span class="fill-remaining-space">Object Structure Management</span>
+  </mat-toolbar>     
+  
+  <div *ngIf="isAuthor"  fxLayout="row" fxLayoutAlign="space-between top" >
+  <div fxFlex='30'>
+  <mat-card class="example-card">
+  <mat-card-header>
+  <div mat-card-avatar ></div>
+  <mat-card-title>{{structureName}} Root - Add/Update</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+  <div class="container" novalidate> 
+    <div>
+      <form  class="form">
+
+      <mat-form-field class="form-element">
+        <mat-select placeholder="Structure Type" #structureType [(value)]="selectedValue" (selectionChange)="onStructureTypeChange($event.value)">
+          <mat-option *ngFor="let type of types" [value]="type.type">
+              {{type.typeDisplayName}}
+          </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field class="form-element">
+        <input matInput placeholder="Root Node" #rootName >
+      </mat-form-field>
+
+        <div class="form-element">
+          <button mat-raised-button color="primary" (click)="createStructureRoot(rootName.value,structureType.value)"  type="submit" class="button" >Submit Form</button>
+        </div>
+
+      </form>
+    
+      <div *ngIf="payLoad" class="form-row">
+        <strong>Saved the following values</strong><br>{{payLoad}}
+      </div>
+    </div>
+  </div>
+  </mat-card-content>
+  </mat-card>
+  </div>
+  <div fxFlex='70' >
+      <mat-card class="example-card">
+          <mat-card-header>
+          <div mat-card-avatar ></div>
+          <mat-card-title>{{structureName}} Structure - Add/Update</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+              <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+                  <mat-tree-node *matTreeNodeDef="let node"
+                                 matTreeNodeToggle
+                                 matTreeNodePadding>
+                          <button mat-icon-button matTreeNodeToggle (click)="getReference(node)"
+                                 [attr.aria-label]="'toggle ' + node.filename">
+                           <mat-icon class="mat-icon-rtl-mirror">
+                             {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                           </mat-icon>
+                         </button>
+                    <mat-checkbox class="checklist-leaf-node"
+                                  [ngClass]="{'drop-above': dragNodeExpandOverArea === 'above' && dragNodeExpandOverNode === node,
+                                              'drop-below': dragNodeExpandOverArea === 'below' && dragNodeExpandOverNode === node,
+                                              'drop-center': dragNodeExpandOverArea === 'center' && dragNodeExpandOverNode === node}"
+                                  [checked]="checklistSelection.isSelected(node)"
+                                  (change)="checklistSelection.toggle(node);"
+                                  draggable="true"
+                                  (dragstart)="handleDragStart($event, node);"
+                                  (dragover)="handleDragOver($event, node);"
+                                  (drop)="handleDrop($event, node);"
+                                  (dragend)="handleDragEnd($event);">{{getText(node.item)}}</mat-checkbox>
+                                  <button mat-icon-button (click)="addNewItem(node)"><mat-icon>add</mat-icon></button>  
+
+                                  <mat-progress-bar *ngIf="node.isLoading"
+                                  mode="indeterminate"
+                                  class="example-tree-progress-bar"></mat-progress-bar>                                  
+                  </mat-tree-node>
+                
+                
+                
+                  <mat-tree-node *matTreeNodeDef="let node; when: hasNoContent" matTreeNodePadding>
+                    <button mat-icon-button disabled></button>
+                    <mat-form-field>
+                      <input matInput #itemValue  placeholder="New item...">
+                    </mat-form-field>
+                    <button mat-button (click)="saveNode(node, itemValue.value)">Save</button>
+                  </mat-tree-node>
+                
+                  <mat-tree-node *matTreeNodeDef="let node; when: hasChild"
+                                 matTreeNodePadding>
+                    <button mat-icon-button matTreeNodeToggle (click)="getReference(node)"
+                            [attr.aria-label]="'toggle ' + node.filename">
+                      <mat-icon class="mat-icon-rtl-mirror">
+                        {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                      </mat-icon>
+                    </button>
+                    <mat-checkbox [ngClass]="{'drop-above': dragNodeExpandOverArea === 'above' && dragNodeExpandOverNode === node,
+                                              'drop-below': dragNodeExpandOverArea === 'below' && dragNodeExpandOverNode === node,
+                                              'drop-center': dragNodeExpandOverArea === 'center' && dragNodeExpandOverNode === node}"
+                                  draggable="true"
+                                  (dragstart)="handleDragStart($event, node);"
+                                  (dragover)="handleDragOver($event, node);"
+                                  (drop)="handleDrop($event, node);"
+                                  (dragend)="handleDragEnd($event);"
+                                  [checked]="descendantsAllSelected(node)"
+                                  [indeterminate]="descendantsPartiallySelected(node)"
+                                  (change)="todoItemSelectionToggle(node)">{{getText(node.item)}}</mat-checkbox>
+                    <button mat-icon-button (click)="addNewItem(node)"><mat-icon>add</mat-icon></button>
+                    <mat-progress-bar *ngIf="node.isLoading"
+                      mode="indeterminate"
+                      class="example-tree-progress-bar"></mat-progress-bar>
+                    </mat-tree-node>
+                </mat-tree>
+                <span #emptyItem></span>
+          </mat-card-content>
+          </mat-card>
+
+  </div>
+  </div>
+  
+  <div *ngIf="!isAuthor"  fxLayout="row" fxLayoutAlign="space-between top" >
+  <div fxFlex='100'>
+    ok
+    
+  </div>
+  </div>  

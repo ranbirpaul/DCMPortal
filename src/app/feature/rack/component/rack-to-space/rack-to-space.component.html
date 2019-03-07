@@ -1,0 +1,92 @@
+
+
+<mat-toolbar color="default">
+    <span class="fill-remaining-space">Rack Space Management</span>
+  </mat-toolbar>
+
+
+<div  fxLayout="row" fxLayoutAlign="space-between top" *ngIf="isAuthor" >
+    <div fxFlex='40'>
+        <mat-card class="example-card filler">
+      <mat-card-header>
+        
+        <mat-card-title>Rack Space Assignation - Add/Update</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+                      
+    <div class="container"  novalidate> 
+        <app-master-location locationInput="editLocation" (locationSelect)="locationSelectHandler($event)">
+        </app-master-location>
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="form">
+
+    <mat-form-field class=" basic-container">
+        <mat-select formControlName="building" placeholder="Building" (selectionChange)="onBuildingSelect($event.value)">
+            <mat-option *ngFor="let building of buildingList" [value]="building.buildingId">
+                {{building.buildingName}}
+            </mat-option>
+          </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class=" basic-container">
+        <mat-select formControlName="floor" placeholder="Floor" >
+            <mat-option *ngFor="let floor of floorList" [value]="floor.floorId">
+                {{floor.floorName}}
+            </mat-option>
+          </mat-select>
+    </mat-form-field>    
+
+      <mat-form-field class=" basic-container">
+          <input matInput placeholder="Room" formControlName="room">
+          <mat-error *ngIf="!formGroup.controls['room'].valid && formGroup.controls['room'].touched">
+            {{ getSiteError() }}
+          </mat-error>
+      </mat-form-field> 
+
+        <mat-form-field class=" basic-container">
+                <input matInput placeholder="Zone" formControlName="zone">
+                <mat-error *ngIf="!formGroup.controls['zone'].valid && formGroup.controls['zone'].touched">
+                  {{ getSiteError() }}
+                </mat-error>
+        </mat-form-field>        
+
+        <mat-form-field class=" basic-container">
+            <input matInput placeholder="Area" formControlName="area">
+            <mat-error *ngIf="!formGroup.controls['area'].valid && formGroup.controls['area'].touched">
+              {{ getSiteError() }}
+            </mat-error>
+        </mat-form-field>        
+        <mat-form-field class=" basic-container">
+            <mat-select placeholder="Rack">
+                <mat-option value="ok">
+                   Rack1
+                </mat-option>
+                <mat-option value="ok1">
+                    Rack2
+                </mat-option >   
+                <mat-option value="ok2">
+                    Rack3
+                </mat-option>                                              
+              </mat-select>
+    </mat-form-field>
+
+    
+        
+      <button mat-raised-button color="primary" type="submit" class="button" [disabled]="!formGroup.valid">Submit Form</button>
+    
+  
+  </form>
+  </div>
+      </mat-card-content>
+  </mat-card>
+  </div>
+    <div fxFlex='60' >
+        <app-rack-to-space-list></app-rack-to-space-list>
+    </div>
+  </div>
+  <div  fxLayout="row" fxLayoutAlign="space-between top" *ngIf="!isAuthor" >
+        <div fxFlex='100'>
+                <app-rack-to-space-list></app-rack-to-space-list>
+        </div>
+</div>            
+
+  

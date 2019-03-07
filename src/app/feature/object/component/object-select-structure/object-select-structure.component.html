@@ -1,0 +1,54 @@
+<h2 mat-dialog-title>Structure Node Selection</h2>
+<mat-dialog-content class="mat-typography">
+  <h3>Select Item For Structure</h3>
+  <mat-tab-group>
+    <!--
+      <mat-tab label="Create DCA Management Object"> 
+        <app-object-add>
+      </app-object-add> 
+    </mat-tab>
+    -->
+      <mat-tab label="Select DCA Management Object">
+          <mat-form-field class="form-element">
+              <mat-select placeholder="Object Type"  (selectionChange)="onObjectTypeChange($event.value)">
+                <mat-option *ngFor="let type of types" [value]="type.type" >
+                    {{type.typeDisplayName}}
+                </mat-option>
+              </mat-select>
+          </mat-form-field>
+
+          <form [formGroup]="form">
+              <mat-selection-list formControlName="objectList" #objects (selectionChange)="onSelection($event, objects.selectedOptions)" >
+                  <mat-list-option *ngFor="let object of objectArray" [value]="object.objectId">
+                    {{object.name}}
+                  </mat-list-option>
+                </mat-selection-list>              
+          </form>
+
+        
+      </mat-tab>
+
+      <mat-tab label="Select 800xA Object">
+          <mat-form-field class="form-element">
+              <mat-select placeholder="800xA Object Type"   (selectionChange)="onEdgeObjectTypeChange($event.value, objects.selectedOptions)">
+                  <mat-option *ngFor="let type of edgeTypes" [value]="type.type" >
+                      {{type.typeDisplayName}}
+                  </mat-option>               
+              </mat-select>
+          </mat-form-field>
+
+          <form [formGroup]="edgeForm">
+          <mat-selection-list formControlName="edgeObjectList"  #objectsSensor (selectionChange)="onSelection($event, objectsSensor.selectedOptions)" >
+              <mat-list-option *ngFor="let object of objectSensorArray" [value]="object.objectId">
+                {{object.name}}
+              </mat-list-option>
+            </mat-selection-list>  
+          </form>
+
+      </mat-tab>
+    </mat-tab-group>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button (click)="onSubmit()" [mat-dialog-close]="data.objects" cdkFocusInitial>Submit</button>
+</mat-dialog-actions>

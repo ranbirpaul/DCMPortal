@@ -1,0 +1,93 @@
+
+
+<mat-toolbar color="default">
+  <span class="fill-remaining-space">Rack To Space Assignment Management</span>
+</mat-toolbar>     
+
+<div *ngIf="isAuthor"  fxLayout="row" fxLayoutAlign="space-between top" >
+<div fxFlex='40'><mat-card class="example-card">
+<mat-card-header>
+<div mat-card-avatar ></div>
+<mat-card-title>Assignment Add/Update</mat-card-title>
+</mat-card-header>
+<mat-card-content>
+<div class="container" *ngIf="!post; else forminfo" novalidate> 
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" class="form">
+  <mat-form-field class=" basic-container">
+    <mat-select placeholder="Unassigned Rack">
+        <mat-option value="ok">
+           Rack1
+        </mat-option>
+        <mat-option value="ok1">
+            Rack2
+        </mat-option >   
+        <mat-option value="ok2">
+            Rack3
+        </mat-option>                                              
+      </mat-select>
+</mat-form-field>
+<mat-form-field class=" basic-container">
+  <mat-select placeholder="Group">
+      <mat-option value="ok">
+         Google
+      </mat-option>
+      <mat-option value="ok1">
+          Amazon
+      </mat-option >                                                
+    </mat-select>
+</mat-form-field>
+
+<mat-form-field class=" basic-container">
+  <mat-select placeholder="Company">
+      <mat-option value="ok">
+         Google India Pvt Ltd
+      </mat-option>
+      <mat-option value="ok1">
+          Amazon India Pvt Ltd
+      </mat-option >                                                
+    </mat-select>
+</mat-form-field>
+
+<mat-form-field class=" basic-container">
+  <mat-select placeholder="Department">
+      <mat-option value="ok">
+         Finance
+      </mat-option>
+      <mat-option value="ok1">
+          HR
+      </mat-option >                                                
+    </mat-select>
+</mat-form-field>
+
+<mat-form-field class=" basic-container">
+  <mat-select placeholder="Tenant">
+      <mat-option value="ok">
+         HF Derivative
+      </mat-option>
+      <mat-option value="ok1">
+          
+      </mat-option >                                                
+    </mat-select>
+</mat-form-field>
+
+<div class="form-element">
+<button mat-raised-button color="primary" type="submit" class="button" [disabled]="!formGroup.valid">Submit Form</button>
+</div>
+
+</form>
+</div>
+</mat-card-content>
+</mat-card>
+</div>
+<div fxFlex='600' >
+<app-rack-to-space-list></app-rack-to-space-list>
+</div>
+</div>
+
+<div *ngIf="!isAuthor"  fxLayout="row" fxLayoutAlign="space-between top" >
+<div fxFlex='100'>
+  <app-rack-to-space-list></app-rack-to-space-list>
+</div>
+</div>      
+
+
